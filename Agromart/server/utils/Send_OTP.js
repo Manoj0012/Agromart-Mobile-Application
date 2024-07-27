@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 const bycrpt = require('bcrypt');
-const verifyOTP_schema = require('../models/verifyOTP_Schema');
+const verifyOTP_schema = require('../models/VerifyOTP_Schema');
 const { generateOTP } = require('./OTP_Generator');
 
 let transporter = nodemailer.createTransport({

@@ -1,8 +1,8 @@
 const bycrpt =require('bcrypt');
-const User = require("../models/userschema");
+const User = require("../models/User_Schema");
 const userprofile=require("../models/Userprofile_Schema")
 const { sendOTP } = require('../utils/Send_OTP');
-const verifyOTP_Schema=require('../models/verifyOTP_Schema');
+const verifyOTP_Schema=require('../models/VerifyOTP_Schema');
 
 
 const signup = async (req,res) => {
