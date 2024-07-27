@@ -36,7 +36,7 @@ const sendOTP = async (result, res) => {
                 })
                 await verifyOTP.save()
                     .catch((err) => { console.log(err) });
-                return res.status(201).json({ message: "User Sucessfully Register", sucess: `OTP Sucessfully Sended to ${result.email}`,info:result})
+                return res.status(201).json({ message: "User Sucessfully Register", sucess: `OTP Sucessfully Sended to ${result.email}`,info:result.email})
             }
         })
     }
