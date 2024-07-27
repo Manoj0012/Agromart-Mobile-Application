@@ -1,12 +1,12 @@
-const express = require("express");
-const bycrpt =require('bcrypt');
-const router = express.Router()
+// const express = require("express");
 
-const User = require("../models/userschema")
+// const router = express.Router()
 
-router.get("/", (req, res) => {
-    res.send("user hello")
-});
+
+
+// router.get("/", (req, res) => {
+//     res.send("user hello")
+// });
 
 router.post("/signup", async (req, res) => {
     try {
@@ -38,25 +38,25 @@ router.post("/signup", async (req, res) => {
     }
 })
 
-router.post("/signin", async (req, res) => {
-    try {
-        const {email, password } = req.body;
-        const user = await User.findOne({
-            email: email
-        })
-        if (!user) {
-            return res.status(400).json({ error: "User doesn't There" })
-        }
-        const Valid_User = await bycrpt.compare(password,user.password);
-        if (!Valid_User) {
-            return res.status(400).json({ error: "Invalid password" });
-        }
-        res.status(200).json({ message: "User Successfully Loggedin" });
-    }
-    catch (error) {
-        console.log(error);
-        res.status(500).json({ error: "An error occurred while signing in" });
-    }
-})
+// router.post("/signin", async (req, res) => {
+//     try {
+//         const {email, password } = req.body;
+//         const user = await User.findOne({
+//             email: email
+//         })
+//         if (!user) {
+//             return res.status(400).json({ error: "User doesn't There" })
+//         }
+//         const Valid_User = await bycrpt.compare(password,user.password);
+//         if (!Valid_User) {
+//             return res.status(400).json({ error: "Invalid password" });
+//         }
+//         res.status(200).json({ message: "User Successfully Loggedin" });
+//     }
+//     catch (error) {
+//         console.log(error);
+//         res.status(500).json({ error: "An error occurred while signing in" });
+//     }
+// })
 
-module.exports = router;
+// module.exports = router;
