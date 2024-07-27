@@ -1,12 +1,17 @@
 const express = require("express");
 const router = express.Router()
-const {signup,Resend_OTP, VerifyOTP}=require("../controller/usercontroller");
+const {signup,Resend_OTP, VerifyOTP, Login, Userprofile}=require("../controller/User_Controller");
  
-router.get("/user",signup);
+router.post("/user/signup",signup);
 
-router.get("/user/resendotp",Resend_OTP);
+router.post("/user/login",Login);
 
-router.get("/user/verifyotp",VerifyOTP);
+router.post("/user/resendotp",Resend_OTP);
+
+router.post("/user/verifyotp",VerifyOTP);
+
+router.post("/user/userprofile",Userprofile);
+
 
 
 
