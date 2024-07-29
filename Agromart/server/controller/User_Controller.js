@@ -1,5 +1,5 @@
 const bycrpt =require('bcrypt');
-const User = require("../models/User_Schema");
+const User = require("../models/Usercredentials_Schema");
 const userprofile=require("../models/Userprofile_Schema")
 const { sendOTP } = require('../utils/Send_OTP');
 const verifyOTP_Schema=require('../models/VerifyOTP_Schema');
