@@ -6,8 +6,8 @@ const { generateOTP } = require('./OTP_Generator');
 let transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-        user: process.env.EMAIL, // Your email
-        pass: process.env.PASSWORD // Your email password
+        user: process.env.EMAIL, 
+        pass: process.env.PASSWORD 
     }
 });
 
