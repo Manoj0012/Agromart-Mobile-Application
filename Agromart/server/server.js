@@ -3,6 +3,7 @@ const express=require("express")
 const bodyparser=require("body-parser")
 const bycrpt =require('bcrypt');
 const mongoose = require('mongoose');
+const { Auth } = require("./middleware/middleware");
 
 const Port=process.env.PORT||8080;
 // const Mongodb_url=process.env.MONGODB_URL;
@@ -14,8 +15,7 @@ app.use(bodyparser.urlencoded({extended:false}))
 app.use("/api",require('./routes/routes'))
 
 
-app.get("/",(req,res)=>{
-    res.send("Sever.js")
+app.get("/api",Auth,(req,res)=>{
     res.end();
 })
 

@@ -3,7 +3,7 @@ const User = require("../models/Usercredentials_Schema");
 const userprofile=require("../models/Userprofile_Schema")
 const { sendOTP } = require('../utils/Send_OTP');
 const verifyOTP_Schema=require('../models/VerifyOTP_Schema');
-
+const jwt=require('jsonwebtoken')
 
 const signup = async (req,res) => {
     try {
@@ -101,11 +101,12 @@ const Login=async(req,res)=>{
         }
         else{
             const Check_verified=user.verified;
+            const token=jwt.sign({User:user.username},"private-key")  
             if(Check_verified){
-                res.status(200).json({ message: "User Successfully Loggedin",verify:true});
+                res.status(200).json({ message: "User Successfully Loggedin",verify:true,Token:token});
             }
             else{
-                res.status(200).json({ message: "User Successfully Loggedin",verify:false});
+                res.status(200).json({ message: "User Successfully Loggedin",verify:false,Token:token});
             }
             
         }
