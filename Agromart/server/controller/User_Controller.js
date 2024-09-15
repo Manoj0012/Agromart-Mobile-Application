@@ -9,8 +9,6 @@ const signup = async (req,res) => {
     try {
         const { email, password } = req.body;
         const bcrypt_pass = await bycrpt.hash(password, 10);
-        var OTP_response={}
-
         const Check = await User.findOne({
             email: email
         })
