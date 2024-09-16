@@ -21,6 +21,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
   }
 
   final OnboardingBloc onboardbloc = OnboardingBloc();
+  @override
   Widget build(BuildContext context) {
     return BlocConsumer<OnboardingBloc, OnboardingState>(
       bloc: onboardbloc,
@@ -29,10 +30,10 @@ class _OnboardingPageState extends State<OnboardingPage> {
       listener: (context, state) {
         if (state is OnboardingInvalidstate) {
           Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => LoginPage()));
+              .push(MaterialPageRoute(builder: (context) => const LoginPage()));
         } else if (state is OnboardingSuccessstate) {
           Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => Homepage()));
+              .push(MaterialPageRoute(builder: (context) => const Homepage()));
         }
       },
       builder: (context, state) {
@@ -40,12 +41,12 @@ class _OnboardingPageState extends State<OnboardingPage> {
           case OnboardingLoadingstate:
             return Scaffold(
               body: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   image: DecorationImage(
                       image: AssetImage("assets/images/Onboarding.png"),
                       fit: BoxFit.cover),
                 ),
-                child: Center(
+                child: const Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -59,7 +60,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       Text(
                         "We make online selling superbly easy",
                         style:
-                            TextStyle(fontSize: 16, color: Color(0xFFFF09051C)),
+                            TextStyle(fontSize: 16, color: Color(0xffff09051c)),
                       )
                     ],
                   ),
@@ -67,14 +68,14 @@ class _OnboardingPageState extends State<OnboardingPage> {
               ),
             );
           case OnboardingSuccessstate:
-            return Scaffold(
+            return const Scaffold(
               body: Center(
                 child: Text("sucess state"),
               ),
             );
 
           default:
-            return SizedBox();
+            return const SizedBox();
         }
       },
     );

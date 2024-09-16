@@ -15,7 +15,7 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
     OnboardingInitalevent event, Emitter<OnboardingState> emit) async {
     bool valid = false;
     emit(OnboardingLoadingstate());
-    await Future.delayed(Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 3));
     if (valid) {
       emit(OnboardingSuccessstate());
     } else  {
