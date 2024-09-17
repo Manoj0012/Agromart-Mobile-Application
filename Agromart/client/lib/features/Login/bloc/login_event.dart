@@ -9,3 +9,6 @@ class SignupNavigateEvent extends LoginEvent {}
 
 class LoginSubmitEvent extends LoginEvent {}
 
+class LoginPassEyeOpenEvent extends LoginEvent {}
+
+class LoginPassEyeCloseEvent extends LoginEvent {}
