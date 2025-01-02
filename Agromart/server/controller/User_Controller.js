@@ -1,4 +1,4 @@
-const bycrpt =require('bcrypt');
+const bycrpt =require('bcryptjs');
 const User = require("../models/Usercredentials_Schema");
 const userprofile=require("../models/Userprofile_Schema")
 const { sendOTP } = require('../utils/Send_OTP');
@@ -8,7 +8,7 @@ const jwt=require('jsonwebtoken')
 const signup = async (req,res) => {
     try {
         const { email, password } = req.body;
-        const bcrypt_pass = await bycrpt.hash(password, 10);
+        // const bcrypt_pass = await bycrpt.hash(password, 10);
         const Check = await User.findOne({
             email: email
         })
@@ -17,7 +17,7 @@ const signup = async (req,res) => {
         }
         const Userdata = new User({
             email: email,
-            password: bcrypt_pass,
+            // password: bcrypt_pass,
             verified:false
         })
          await Userdata.save()
@@ -25,8 +25,6 @@ const signup = async (req,res) => {
             OTP_response=sendOTP(result,res);
          })
          .catch((err)=>{console.log(err)})
-         
-
     }
     catch (error) {
         if (error.code === 11000) {

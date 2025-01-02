@@ -4,7 +4,6 @@ const userprofile=require("../models/Userprofile_Schema")
 
 
 const AddProduct=async(req,res)=>{
-
 try{
     const {email,cropname,croptype,cropcolor,
         cropcategories,avalibilty,priceperkg,
@@ -34,7 +33,6 @@ try{
 catch(error){
     return res.status(500).json({message:"An error Occur",sucess:false})
 }
-
 }
 
 

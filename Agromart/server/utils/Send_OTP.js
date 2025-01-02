@@ -1,5 +1,5 @@
 const nodemailer = require('nodemailer');
-const bycrpt = require('bcrypt');
+const bycrpt = require('bcryptjs');
 const verifyOTP_schema = require('../models/VerifyOTP_Schema');
 const { generateOTP } = require('./OTP_Generator');
 

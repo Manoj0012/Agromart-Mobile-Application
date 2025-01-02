@@ -1,7 +1,7 @@
 
 const express=require("express")
 const bodyparser=require("body-parser")
-const bycrpt =require('bcrypt');
+const bycrpt =require('bcryptjs');
 const mongoose = require('mongoose');
 const { Auth } = require("./middleware/middleware");
 
