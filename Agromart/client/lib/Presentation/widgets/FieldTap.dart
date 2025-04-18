@@ -1,17 +1,18 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import '../Utiltis/utilis.dart';
-import 'package:client/bloc/Field_bloc.dart';
+import "package:client/bloc/Field_bloc.dart";
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../bloc/Fiels_state.dart';
+import '../Utiltis/utilis.dart';
+
 class Fieldtap extends StatelessWidget {
-  final  String label;
+  final String label;
   final String hint;
   final String fieldname;
   final TextEditingController controller;
-   const Fieldtap({
+  const Fieldtap({
     super.key,
-     required this.label,
+    required this.label,
     required this.hint,
     required this.fieldname,
     required this.controller,
@@ -23,10 +24,9 @@ class Fieldtap extends StatelessWidget {
     String? errorText;
 
     return BlocConsumer<FieldBloc, FieldState>(
-      listener: (context, state) {
-      },
+      listener: (context, state) {},
       builder: (context, state) {
-        if (state is FieldError_State && state.fieldname==this.fieldname) {
+        if (state is FieldError_State && state.fieldname == this.fieldname) {
           errorText = state.error_msg;
         }
         return Container(

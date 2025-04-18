@@ -1,3 +1,5 @@
+import 'package:client/bloc/Field_Event.dart';
+import 'package:client/bloc/Fiels_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FieldBloc extends Bloc<FieldEvent, FieldState> {
@@ -9,20 +11,6 @@ class FieldBloc extends Bloc<FieldEvent, FieldState> {
   }
 }
 
-class FieldState {}
 
-class FieldInitial extends FieldState {}
 
-class FieldError_State extends FieldState {
-  final String fieldname;
-  final String error_msg;
-  FieldError_State({required this.fieldname, required this.error_msg});
-}
 
-class FieldEvent {}
-
-class FieldError_Event extends FieldEvent {
-  final String fieldname;
-  final String error_msg;
-  FieldError_Event({required this.fieldname, required this.error_msg});
-}
