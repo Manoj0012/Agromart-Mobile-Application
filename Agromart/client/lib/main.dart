@@ -1,4 +1,6 @@
 import 'package:client/Presentation/Onboarding_ui.dart';
+import 'package:client/bloc/Field_bloc.dart';
+import 'package:client/bloc/Login_bloc.dart';
 import 'package:client/bloc/Onboarding_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,12 +14,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: BlocProvider(
-        create: (context) => OnboardingBloc(),
-        child: const OnboardingUi(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => OnboardingBloc(),
+        ),
+        BlocProvider(
+          create: (context) => LoginBloc(),
+        ),
+        BlocProvider(
+          create: (context) => FieldBloc(),
+        ),
+      ],
+      child: const MaterialApp(
+        home: OnboardingUi(),
+        debugShowCheckedModeBanner: false,
       ),
-      debugShowCheckedModeBanner: false,
     );
   }
 }

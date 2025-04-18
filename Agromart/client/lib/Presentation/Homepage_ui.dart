@@ -1,5 +1,7 @@
-import 'package:client/Presentation/Utiltis/Backgroundimage.dart';
+
 import 'package:flutter/material.dart';
+
+import 'Utiltis/Backgroundimage.dart';
 
 class HomepageUi extends StatelessWidget {
   const HomepageUi({super.key});
@@ -8,7 +10,7 @@ class HomepageUi extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: BackgroundImage(child: Center(child: Text("Home page"))),
+      body: const BackgroundImage(child: Center(child: Text("Home page"))),
     );
   }
 }

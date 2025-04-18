@@ -7,11 +7,8 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
     on<OnboardingInitalEvent>((event, emit) async {
       emit(OnboardingLoading_state());
       await Future.delayed(const Duration(seconds: 2));
-      emit(OnboardingSucess_state());
+      emit(OnboardingReAuth_state());
+      // emit(OnboardingSucess_state());
     });
   }
 }
-
-
-
-

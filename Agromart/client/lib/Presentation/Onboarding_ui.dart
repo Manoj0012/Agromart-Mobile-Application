@@ -1,4 +1,5 @@
 import 'package:client/Presentation/Homepage_ui.dart';
+import 'package:client/Presentation/Loginpage_ui.dart';
 import 'package:client/Presentation/Utiltis/Backgroundimage.dart';
 import 'package:client/Presentation/Utiltis/Logo.dart';
 import 'package:client/bloc/Onboarding_bloc.dart';
@@ -17,7 +18,6 @@ class _OnboardingUiState extends State<OnboardingUi> {
   @override
   void initState() {
     super.initState();
-    // TODO: implement initState
     context.read<OnboardingBloc>().add(OnboardingInitalEvent());
   }
 
@@ -30,6 +30,13 @@ class _OnboardingUiState extends State<OnboardingUi> {
               context,
               MaterialPageRoute(
                 builder: (context) => const HomepageUi(),
+              ));
+        }
+        if (state is OnboardingReAuth_state) {
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const LoginpageUi(),
               ));
         }
       },
