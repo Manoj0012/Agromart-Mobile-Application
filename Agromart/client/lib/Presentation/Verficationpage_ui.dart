@@ -1,9 +1,12 @@
 import 'package:client/Presentation/Homepage_ui.dart';
 import 'package:client/Presentation/Utiltis/Backgroundimage.dart';
 import 'package:client/Presentation/Utiltis/utilis.dart';
+import 'package:client/Presentation/detailspage_ui.dart';
 import 'package:client/Presentation/widgets/VerficationResend.dart';
 import 'package:client/Presentation/widgets/VerficationTitle.dart';
 import 'package:client/bloc/Verfication_bloc.dart';
+import 'package:client/bloc/Verfication_state.dart';
+import 'package:client/bloc/Verification_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
@@ -29,8 +32,15 @@ class VerficationpageUi extends StatelessWidget {
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => HomepageUi(),
+                builder: (context) => DetailspageUi(),
               ));
+        }
+        if (state is VerficationError_state) {
+          Flushbar(
+            message: state.errorMsg,
+            duration: const Duration(seconds: 4),
+            backgroundColor: Color(utils.error_color),
+          ).show(context);
         }
         if (state is VerficationResend_state) {
           pinController.clear();

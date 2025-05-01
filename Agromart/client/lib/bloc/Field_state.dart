@@ -1,6 +1,10 @@
 class FieldState {}
 
-class FieldInitial extends FieldState {}
+class FieldInitial extends FieldState {
+  final String fieldname;
+
+  FieldInitial({required this.fieldname});
+}
 
 class FieldError_State extends FieldState {
   final String fieldname;
