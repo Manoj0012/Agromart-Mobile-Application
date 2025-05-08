@@ -5,38 +5,6 @@ const { sendOTP } = require('../utils/Send_OTP');
 const verifyOTP_Schema=require('../models/VerifyOTP_Schema');
 const jwt=require('jsonwebtoken')
 
-const signup = async (req,res) => {
-    try {
-        const { email, password } = req.body;
-        // const bcrypt_pass = await bycrpt.hash(password, 10);
-        const Check = await User.findOne({
-            email: email
-        })
-        if (Check) {
-            return res.status(400).json({ error: "Email already exists" });
-        }
-        const Userdata = new User({
-            email: email,
-            // password: bcrypt_pass,
-            verified:false
-        })
-         await Userdata.save()
-         .then((result)=>{
-            OTP_response=sendOTP(result,res);
-         })
-         .catch((err)=>{console.log(err)})
-    }
-    catch (error) {
-        if (error.code === 11000) {
-            res.status(400).json({ error: "Email already exists" });
-        } else {
-            console.error(error);
-            res.status(500).json({ error: "An error occurred while adding user data" });
-        }
-    }
-}
-
-
 const Resend_OTP=async(req,res)=>{
     const result=req.body;
     const valid=await verifyOTP_Schema.findOne({email:result.email});
@@ -51,8 +19,7 @@ const VerifyOTP=async(req,res)=>{
 const {email,user_OTP}=req.body;
 try{
 const records=await verifyOTP_Schema.findOne({ email: email });
-const user=await User.findOne({ email: email });
-// console.log(user);
+let user=await User.findOne({ email: email });
 if(!records){
     return res.status(400).json({ success: false, message: "OTP not found" });
 }
@@ -63,18 +30,22 @@ if(!Vaild_OTP){
 else{
     const currentTime = Date.now();
     if (currentTime < records.ExpyTime) {
-        await User.findByIdAndUpdate(  
-             user._id,{ verified: true },
-            { new: true });
+        if(!user){
+            user = new User({
+                           email: email,
+                           verified:false
+                       })
+                       await user.save()
+       }
+        const token=jwt.sign(user.email,"private key");
+        const verified=user.verified;
         await verifyOTP_Schema.deleteMany({ email: email})
-        return res.status(200).json({ success: true, message: "OTP is valid" });
+        return res.status(200).json({ success: true,token:token, message: "OTP is valid",verified:verified});
     } else {
         await verifyOTP_Schema.deleteMany({ email: email})
-        return res.status(500).json({ success: false, message: "OTP has expired" });
-    }
-   
+        return res.status(500).json({ success: false,message: "OTP has expired",verified:verified});
+    } 
 }
-
 }
 catch(error){
     console.log(error);
@@ -83,62 +54,49 @@ catch(error){
 }
 
 const Login=async(req,res)=>{
-    try {
-        const {email, password } = req.body;
-        const user = await User.findOne({
-            email: email
-        })
-        if (!user) {
-            return res.status(400).json({ error: "User doesn't There" })
+    try{
+        const email=req.body.email;
+        const OTP_response=await sendOTP(email);
+        if(!OTP_response.success){
+            return res.status(534).json({email:email,message:OTP_response.message,success:OTP_response.success});
         }
-        const Valid_User = await bycrpt.compare(password,user.password);
-        if (!Valid_User) {
-            return res.status(400).json({ error: "Invalid password" });
-        }
-        else{
-            const Check_verified=user.verified;
-            const token=jwt.sign({User:user.username},"private-key")  
-            if(Check_verified){
-                res.status(200).json({ message: "User Successfully Loggedin",verify:true,Token:token});
-            }
-            else{
-                res.status(200).json({ message: "User Successfully Loggedin",verify:false,Token:token});
-            }
-            
-        }
+        return res.status(200).json({email:email,message:OTP_response.message,success:OTP_response.success});
     }
-    catch (error) {
-        console.log(error);
-        res.status(500).json({ error: "An error occurred while signing in" });
+    catch(error){
+        console.log("An error occur",error);
+        res.status(500).json({message:"Internal server error",success:false})
     }
-
 }
 
 
 const Userprofile=async(req,res)=>{
     try{
-        const{email,Firstname,Lastname,Phonenumber,Location}=req.body;
-        const user=await User.findOne({email:email});
+        const{firstname,lastname,emailAddress,phonenumber,longitude,latitude,location}=req.body;
+        const user=await User.findOne({email:emailAddress});
         if(user){
          const userprofiledata=new userprofile({
-            email:email,
-            Firstname:Firstname,
-            Lastname:Lastname,
-            Phonenumber:Phonenumber,
-            Location:Location
+            email:emailAddress,
+            Firstname:firstname,
+            Lastname:lastname,
+            Phonenumber:phonenumber,
+            longitude:longitude,
+            latitude:latitude,
+            Location:location
          })
          await userprofiledata.save();
-         return res.status(200).json({ message: "User Profile Successfully Stored",success:true});
+         await User.findByIdAndUpdate(  
+             user._id,{ verified: true },
+            { new: true });
+         return res.status(200).json({ message: "User Profile Successfully Stored",sucess:true});
         }
         else{
             return res.status(500).json({ message: "User doesn't There",success:false});
         }
-        
     }
     catch(error){
-        console.log(error);
+     console.log(error);
     res.status(500).json({ error: "An error occurred while signing in" });
     }
 };
 
-module.exports = { signup,Login,Resend_OTP,VerifyOTP,Userprofile};
+module.exports = {Login,Resend_OTP,VerifyOTP,Userprofile};

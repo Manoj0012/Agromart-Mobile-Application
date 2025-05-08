@@ -18,7 +18,7 @@ class Locationbutton extends StatelessWidget {
             color: Colors.black.withOpacity(0.1), // shadow color
             spreadRadius: 1,
             blurRadius: 4,
-            offset: Offset(0, 3), // shadow position
+            offset: const Offset(0, 3), // shadow position
           ),
         ],
       ),
@@ -32,7 +32,7 @@ class Locationbutton extends StatelessWidget {
           onPressed: Onpressed,
           child: Text(
             label,
-            style: TextStyle(color: Colors.black, fontSize: 18),
+            style: const TextStyle(color: Colors.black, fontSize: 18),
           )),
     );
   }

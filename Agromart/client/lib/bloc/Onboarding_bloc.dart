@@ -1,14 +1,29 @@
 import 'package:client/bloc/Onboarding_event.dart';
 import 'package:client/bloc/Onboarding_state.dart';
+import 'package:client/Repo/Auth_repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
   OnboardingBloc() : super(OnboardingLoading_state()) {
     on<OnboardingInitalEvent>((event, emit) async {
-      emit(OnboardingLoading_state());
-      await Future.delayed(const Duration(seconds: 2));
-      emit(OnboardingReAuth_state());
-      // emit(OnboardingSucess_state());
+      try {
+        emit(OnboardingLoading_state());
+        final data = await AuthRepo.AuthOnboarding();
+        if (data != false) {
+          final userVerified = data['user']['verified'];
+          if (!userVerified) {
+            return emit(OnboardingProfileSet());
+          }
+          await Future.delayed(const Duration(seconds: 2));
+          return emit(OnboardingSucess_state(userdata: data));
+        }
+      } catch (error) {
+        return emit(OnboardingError_state(msg: "Internal Server Error"));
+      }
     });
+
+    on<OnboardingReAuth_Event>(
+      (event, emit) => emit(OnboardingReAuth_state()),
+    );
   }
 }

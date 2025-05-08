@@ -10,4 +10,12 @@ class LoginError_State extends LoginState {
 }
 
 // ignore: camel_case_types
-class LoginSucess_State extends LoginState {}
+class LoginSucess_State extends LoginState {
+  final String email;
+  LoginSucess_State({required this.email});
+
+}
+
+class LoginOnloadind_State extends LoginState{
+  
+}

@@ -4,7 +4,6 @@ const {signup,Resend_OTP, VerifyOTP, Login, Userprofile}=require("../controller/
 const { AddProduct, AllProduct, CategoriesProducts, ProductsDetails, MyProduct, EditProducts, DeleteProducts } = require("../controller/Product_Controller");
 const { Auth } = require("../middleware/middleware");
  
-router.post("/user/signup",signup);
 
 router.post("/user/login",Login);
 

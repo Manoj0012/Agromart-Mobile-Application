@@ -18,4 +18,10 @@ class Details_OnsubmitEvent extends DetailsEvent {
       required this.longitude});
 }
 
-class DetailsSetLocationEvent extends DetailsEvent {}
+class DetailsSetLocationEvent extends DetailsEvent {
+  
+}
+
+class DetailsNavigateHomeEvent extends DetailsEvent {
+  
+}

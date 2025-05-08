@@ -26,10 +26,10 @@ class Fieldtap extends StatelessWidget {
     return BlocConsumer<FieldBloc, FieldState>(
       listener: (context, state) {},
       builder: (context, state) {
-        if (state is FieldError_State && state.fieldname == this.fieldname) {
+        if (state is FieldError_State && state.fieldname == fieldname) {
           errorText = state.error_msg;
         }
-        if (state is FieldInitial && state.fieldname == this.fieldname) {
+        if (state is FieldInitial && state.fieldname == fieldname) {
           errorText = null;
         }
         return Column(

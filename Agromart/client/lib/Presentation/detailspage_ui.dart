@@ -1,4 +1,5 @@
 import 'package:another_flushbar/flushbar.dart';
+import 'package:client/Presentation/ProfileCreated_ui.dart';
 import 'package:client/Presentation/Utiltis/Backgroundimage.dart';
 import 'package:client/Presentation/Utiltis/utilis.dart';
 import 'package:client/Presentation/widgets/FieldButton.dart';
@@ -22,12 +23,13 @@ class DetailspageUi extends StatefulWidget {
 class _DetailspageUiState extends State<DetailspageUi> {
   double? latitude;
   double? longitude;
+  @override
   Widget build(BuildContext context) {
     Utils utils = Utils();
-    TextEditingController firstname = new TextEditingController();
-    TextEditingController lastname = new TextEditingController();
-    TextEditingController emailaddress = new TextEditingController();
-    TextEditingController phonenumber = new TextEditingController();
+    TextEditingController firstname = TextEditingController();
+    TextEditingController lastname = TextEditingController();
+    TextEditingController emailaddress = TextEditingController();
+    TextEditingController phonenumber = TextEditingController();
 
     return BlocConsumer<DetailsBloc, DetailsState>(
       listener: (context, state) {
@@ -37,19 +39,29 @@ class _DetailspageUiState extends State<DetailspageUi> {
         }
         if (state is DetailLocationError_State) {
           Flushbar(
+            flushbarPosition: FlushbarPosition.TOP,
             message: state.errorMsg,
             duration: const Duration(seconds: 4),
             backgroundColor: Color(utils.Secoundary_color),
           ).show(context);
         }
+        if(state is DetailapageErrorState){
+                    Flushbar(
+            flushbarPosition: FlushbarPosition.TOP,
+            message: state.error,
+            duration: const Duration(seconds: 4),
+            backgroundColor: Color(utils.Secoundary_color),
+          ).show(context);
+        }
         if (state is DetailsSuccessState) {
-          print("yse");
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => const ProfilecreatedUi()));
         }
       },
       builder: (context, state) {
         if (state is DetailLocationSucess_State) {
-          this.latitude = state.position.latitude;
-          this.longitude = state.position.longitude;
+          latitude = state.geopostion.latitude;
+          longitude = state.geopostion.longitude;
         }
         return Scaffold(
             body: BackgroundImage(
@@ -103,8 +115,8 @@ class _DetailspageUiState extends State<DetailspageUi> {
                         lastname: lastname.text,
                         emailaddress: emailaddress.text,
                         phonenumber: phonenumber.text,
-                        latitude: this.latitude,
-                        longitude: this.longitude));
+                        latitude: latitude,
+                        longitude: longitude));
                   })
             ],
           ),

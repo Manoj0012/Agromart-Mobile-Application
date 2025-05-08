@@ -1,9 +1,10 @@
 import 'package:client/Presentation/Homepage_ui.dart';
 import 'package:client/Presentation/Utiltis/Backgroundimage.dart';
 import 'package:client/Presentation/Utiltis/utilis.dart';
-import 'package:client/Presentation/detailspage_ui.dart';
+import 'package:client/Presentation/Detailspage_ui.dart';
 import 'package:client/Presentation/widgets/VerficationResend.dart';
 import 'package:client/Presentation/widgets/VerficationTitle.dart';
+import 'package:client/bloc/User_Bloc.dart';
 import 'package:client/bloc/Verfication_bloc.dart';
 import 'package:client/bloc/Verfication_state.dart';
 import 'package:client/bloc/Verification_event.dart';
@@ -19,20 +20,27 @@ class VerficationpageUi extends StatelessWidget {
   Widget build(BuildContext context) {
     Utils utils = Utils();
     final TextEditingController pinController = TextEditingController();
+    final userState = context.watch<UserBloc>().state;
+     String? useremail;
+    if (userState is UserAuthenticate) {
+      useremail = userState.email;
+    }
     return BlocConsumer<VerficationBloc, VerficationState>(
       listener: (context, state) {
         if (state is verficationSucess_state) {
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => HomepageUi(),
+                builder: (context) => const HomepageUi(
+                  userdata: null,
+                ),
               ));
         }
         if (state is VerificationProfileSet_state) {
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => DetailspageUi(),
+                builder: (context) => const DetailspageUi(),
               ));
         }
         if (state is VerficationError_state) {
@@ -67,9 +75,9 @@ class VerficationpageUi extends StatelessWidget {
                   appContext: context,
                   controller: pinController,
                   onCompleted: (value) {
-                    context
-                        .read<VerficationBloc>()
-                        .add(VerficationOnsubmit_Event(otp: value));
+                    context.read<VerficationBloc>().add(
+                        VerficationOnsubmit_Event(
+                            otp: value, email: useremail));
                   },
                   keyboardType: TextInputType.number,
                   autoFocus: true,

@@ -40,7 +40,11 @@ dependencies:
   another_flushbar: ^1.12.30
   geolocator: ^10.1.0 
   permission_handler: ^11.0.1
-
+  geocoding: ^2.1.0
+  lottie: ^3.2.0
+  dio:
+  flutter_secure_storage:
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -67,6 +71,7 @@ flutter:
   assets:
     - assets/pattern.png
     - assets/Logo.png
+    - assets/congratsgif.json
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
 

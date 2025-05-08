@@ -16,7 +16,8 @@ app.use("/api",require('./routes/routes'))
 
 
 app.get("/api",Auth,(req,res)=>{
-    res.end();
+    const userdata=req.user;
+    return res.status(200).json({message:"valid",user:userdata,sucess:true})
 })
 
 app.listen(Port, () => {

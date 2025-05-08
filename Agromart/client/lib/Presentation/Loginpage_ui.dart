@@ -9,6 +9,7 @@ import 'package:client/bloc/Field_bloc.dart';
 import 'package:client/bloc/Login_bloc.dart';
 import 'package:client/bloc/Login_event.dart';
 import 'package:client/bloc/Login_state.dart';
+import 'package:client/bloc/User_Bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -32,10 +33,11 @@ class _LoginpageUiState extends State<LoginpageUi> {
                 fieldname: state.fieldname, error_msg: state.error_msg));
           }
           if (state is LoginSucess_State) {
+            context.read<UserBloc>().add(UserLoggedinEvent(email: state.email));
             Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => VerficationpageUi(),
+                  builder: (context) => const VerficationpageUi(),
                 ));
           }
         },
@@ -68,6 +70,25 @@ class _LoginpageUiState extends State<LoginpageUi> {
                     context.read<LoginBloc>().add(LoginSubmit_Event(
                           email: email_controller.text,
                         ));
+                  },
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                BlocBuilder<LoginBloc, LoginState>(
+                  builder: (context, state) {
+                    if (state is LoginOnloadind_State) {
+                      return Column(
+                        children: [
+                          CircularProgressIndicator(
+                            color: Color(utils.Primary_color),
+                          ),
+                          const SizedBox(height:10,),
+                           Text("Please wait",style: TextStyle(color:Color(utils.Secoundary_color),fontSize: 16,fontWeight:FontWeight.w300),)
+                        ],
+                      );
+                    }
+                    return const SizedBox();
                   },
                 )
               ],
