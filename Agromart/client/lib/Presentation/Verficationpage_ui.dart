@@ -21,7 +21,7 @@ class VerficationpageUi extends StatelessWidget {
     Utils utils = Utils();
     final TextEditingController pinController = TextEditingController();
     final userState = context.watch<UserBloc>().state;
-     String? useremail;
+    String? useremail;
     if (userState is UserAuthenticate) {
       useremail = userState.email;
     }
@@ -31,9 +31,7 @@ class VerficationpageUi extends StatelessWidget {
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => const HomepageUi(
-                  userdata: null,
-                ),
+                builder: (context) => const HomepageUi(),
               ));
         }
         if (state is VerificationProfileSet_state) {

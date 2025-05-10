@@ -7,6 +7,7 @@ import 'package:client/Presentation/Utiltis/utilis.dart';
 import 'package:client/bloc/Onboarding_bloc.dart';
 import 'package:client/bloc/Onboarding_event.dart';
 import 'package:client/bloc/Onboarding_state.dart';
+import 'package:client/bloc/User_Bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -36,10 +37,13 @@ class _OnboardingUiState extends State<OnboardingUi> {
               ));
         }
         if (state is OnboardingSucess_state) {
+          context
+              .read<UserBloc>()
+              .add(UserLoggedinEvent(email: state.userdata));
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => HomepageUi(userdata: state.userdata),
+                builder: (context) => const HomepageUi(),
               ));
         }
         if (state is OnboardingError_state) {
