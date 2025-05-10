@@ -10,14 +10,16 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
         emit(OnboardingLoading_state());
         final data = await AuthRepo.AuthOnboarding();
         if (data != false) {
-          final userVerified = data['user']['verified'];
+          final userVerified = data['user']['Usercredentials']['verified'];
           if (!userVerified) {
             return emit(OnboardingProfileSet());
           }
           await Future.delayed(const Duration(seconds: 2));
-          return emit(OnboardingSucess_state(userdata: data));
+          return emit(OnboardingSucess_state(
+              userdata: data['user']['userdata']['Firstname']));
         }
       } catch (error) {
+        print(error);
         return emit(OnboardingError_state(msg: "Internal Server Error"));
       }
     });
