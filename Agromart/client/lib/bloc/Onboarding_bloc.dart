@@ -19,7 +19,6 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
               userdata: data['user']['userdata']['Firstname']));
         }
       } catch (error) {
-        print(error);
         return emit(OnboardingError_state(msg: "Internal Server Error"));
       }
     });

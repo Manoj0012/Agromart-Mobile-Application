@@ -45,6 +45,7 @@ dependencies:
   dio:
   flutter_secure_storage:
   curved_navigation_bar:
+  shimmer: ^3.0.0
   
 dev_dependencies:
   flutter_test:

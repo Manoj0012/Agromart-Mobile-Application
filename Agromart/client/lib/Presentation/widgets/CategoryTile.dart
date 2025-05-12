@@ -50,6 +50,7 @@ class Categorytile extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       productname,
@@ -59,8 +60,8 @@ class Categorytile extends StatelessWidget {
                     Text(
                       productlocation,
                       style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w300,
                           color: Color(utils.Secoundary_color)),
                     ),
                     Row(
@@ -74,8 +75,10 @@ class Categorytile extends StatelessWidget {
                         ),
                         Text(
                           "per kg",
-                          style:
-                              TextStyle(color: Color(utils.Secoundary_color)),
+                          style: TextStyle(
+                              color: Color(utils.Secoundary_color),
+                              fontSize: 14,
+                              fontWeight: FontWeight.w300),
                         )
                       ],
                     )
@@ -86,6 +89,7 @@ class Categorytile extends StatelessWidget {
                 padding: const EdgeInsets.all(8),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     if (!available)
                       Text("Sold Out",
@@ -93,7 +97,7 @@ class Categorytile extends StatelessWidget {
                               color: Color(utils.error_color), fontSize: 20)),
                     if (available)
                       Text(
-                        quantity,
+                        "$quantity-kg",
                         style: const TextStyle(fontSize: 16),
                       ),
                     if (available)

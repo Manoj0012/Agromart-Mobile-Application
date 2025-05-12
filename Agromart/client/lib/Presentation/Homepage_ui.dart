@@ -5,16 +5,10 @@ import 'package:client/Presentation/pages/Categoriepage.dart';
 import 'package:client/Presentation/pages/Homepage.dart';
 import 'package:client/Presentation/pages/Userprofilepage.dart';
 import 'package:client/Presentation/Utiltis/utilis.dart';
-import 'package:client/Presentation/widgets/HomeCategoriesCard.dart';
-import 'package:client/Presentation/widgets/HomeFunctionButton.dart';
-import 'package:client/Presentation/widgets/HomeHeader.dart';
-import 'package:client/Presentation/widgets/Homeimage.dart';
 import 'package:client/bloc/BottomNav_bloc.dart';
-import 'package:client/bloc/User_Bloc.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'Utiltis/Backgroundimage.dart';
 
 class HomepageUi extends StatelessWidget {
   const HomepageUi({
@@ -41,7 +35,7 @@ class HomepageUi extends StatelessWidget {
             if (state is BottomnavProfile) {
               return const UserprofilePage();
             }
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           },
         ),
         bottomNavigationBar: CurvedNavigationBar(

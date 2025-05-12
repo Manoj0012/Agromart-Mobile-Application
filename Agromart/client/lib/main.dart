@@ -1,6 +1,8 @@
 import 'package:client/Presentation/Loginpage_ui.dart';
 import 'package:client/Presentation/Onboarding_ui.dart';
 import 'package:client/bloc/BottomNav_bloc.dart';
+import 'package:client/bloc/CatergoryNav_bloc.dart';
+import 'package:client/bloc/Catergory_bloc.dart';
 import 'package:client/bloc/Field_bloc.dart';
 import 'package:client/bloc/Login_bloc.dart';
 import 'package:client/bloc/Onboarding_bloc.dart';
@@ -39,7 +41,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(create: (context) => DetailsBloc()),
         BlocProvider(create: (context) => UserBloc()),
-        BlocProvider(create: (context) => BottomnavBloc())
+        BlocProvider(create: (context) => BottomnavBloc()),
+        BlocProvider(create: (context) => CatergorynavBloc()),
+        BlocProvider(create: (context) => CatergoryBloc())
       ],
       child: MaterialApp(
         home: const OnboardingUi(),
