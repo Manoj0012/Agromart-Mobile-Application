@@ -1,3 +1,4 @@
+import 'package:client/Models/CropModels.dart';
 import 'package:client/Presentation/Utiltis/Backgroundimage.dart';
 import 'package:client/Presentation/Utiltis/utilis.dart';
 import 'package:client/Presentation/widgets/CategoryCard.dart';
@@ -25,47 +26,48 @@ class _CategoriepageState extends State<Categoriepage> {
   Widget build(BuildContext context) {
     // ignore: non_constant_identifier_names
     final List<dynamic> Topbar = [
-      {'label': "All", 'onpressed': () {}},
-      {'label': "Rice", 'onpressed': () {}},
-      {'label': "Vegetables", 'onpressed': () {}},
-      {'label': "Dairy", 'onpressed': () {}},
-      {'label': "Fruits", 'onpressed': () {}},
+      {'label': "All"},
+      {'label': "Grains"},
+      {'label': "Vegetables"},
+      {'label': "Dairy"},
+      {'label': "Fruits"},
     ];
     Utils utils = Utils();
-    return BackgroundImage(
-      child: Scaffold(
+    return Scaffold(
+        backgroundColor: Colors.white,
+        appBar: AppBar(
           backgroundColor: Colors.transparent,
-          appBar: AppBar(
-            backgroundColor: Colors.transparent,
-            title: const Text(
-              "Categories",
-              style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w700),
-            ),
-            leading: Padding(
-              padding: const EdgeInsets.only(left: 15),
-              child: Center(
-                child: Container(
-                  height: 40,
-                  width: 40,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(
-                      color: Color(utils.Primary_color), // border color
-                      width: 2.0, // border width
-                    ),
-                    borderRadius:
-                        BorderRadius.circular(12), // optional: rounded corners
+          title: const Text(
+            "Categories",
+            style: TextStyle(
+                fontSize: 20, color: Colors.black, fontWeight: FontWeight.w700),
+          ),
+          leading: Padding(
+            padding: const EdgeInsets.only(left: 15),
+            child: Center(
+              child: Container(
+                height: 40,
+                width: 40,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(
+                    color: Color(utils.Primary_color), // border color
+                    width: 2.0, // border width
                   ),
-                  child: IconButton(
-                      onPressed: () {}, icon: const Icon(Icons.arrow_back)),
+                  borderRadius:
+                      BorderRadius.circular(12), // optional: rounded corners
                 ),
+                child: IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(Icons.arrow_back)),
               ),
             ),
           ),
-          body: Padding(
+        ),
+        body: BackgroundImage(
+          child: Padding(
             padding: const EdgeInsets.all(10),
             child: Column(
               children: [
@@ -101,16 +103,17 @@ class _CategoriepageState extends State<Categoriepage> {
                         );
                       }
                       if (state is CatergorySucessState) {
+                        List<CropProduct> data = state.data;
                         return ListView.builder(
                           shrinkWrap: true,
                           physics: const ClampingScrollPhysics(),
-                          itemCount: 10,
+                          itemCount: data.length,
                           itemBuilder: (context, index) {
-                            return const Categorytile(
-                              productname: 'Rice',
-                              productlocation: "nagercoil,Tamil Nadu",
-                              price: "40",
-                              quantity: "100",
+                            return Categorytile(
+                              productname: data[index].cropName,
+                              productlocation: data[index].location,
+                              price: data[index].pricePerKG,
+                              quantity: data[index].cropColor,
                               available: true,
                               src: 'assets/veg.png',
                             );
@@ -137,7 +140,7 @@ class _CategoriepageState extends State<Categoriepage> {
                 )
               ],
             ),
-          )),
-    );
+          ),
+        ));
   }
 }

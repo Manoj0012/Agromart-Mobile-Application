@@ -94,7 +94,7 @@ const MyProduct=async(req,res)=>{
     try{
     const{id}=req.body
     const product=await Product.deleteOne({_id:id})
-       return res.status(200).json({message:"Product Data Deleted Sucessfully",sucess:true,Product})
+       return res.status(200).json({message:"Product Data Deleted Sucessfully",sucess:true,product})
     .catch((error)=>{
        return res.status(500).json({message:"Product Data Not Deleted Sucessfully",sucess:false,error})
     })
@@ -106,9 +106,8 @@ const MyProduct=async(req,res)=>{
 
 const CategoriesProducts=async(req,res)=>{
     try{
-    const {cropcategories}=req.body;
-    
-    const result=await Product.find({CropCategories:cropcategories})
+    const crop=req.query.crop;
+    const result=await Product.find({CropType:crop})
     if(result.length==0){
         return res.status(200).json({message:"Data Successfully Retrived",result,Data:false})  
     }

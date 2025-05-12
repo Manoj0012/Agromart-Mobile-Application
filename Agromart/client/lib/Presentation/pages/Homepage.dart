@@ -1,7 +1,10 @@
+import 'package:client/Presentation/pages/Categoriepage.dart';
 import 'package:client/Presentation/widgets/HomeCategoriesCard.dart';
 import 'package:client/Presentation/widgets/HomeFunctionButton.dart';
 import 'package:client/Presentation/widgets/HomeHeader.dart';
 import 'package:client/Presentation/widgets/Homeimage.dart';
+import 'package:client/bloc/CatergoryNav_bloc.dart';
+import 'package:client/bloc/Catergory_bloc.dart';
 import 'package:client/bloc/User_Bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,10 +22,58 @@ class Homepage extends StatelessWidget {
     }
     // final Utils utils = Utils();
     final List<dynamic> labels = [
-      {'label': 'Fruits', 'src': 'assets/fruit.png'},
-      {'label': 'Vegetables', 'src': 'assets/veg.png'},
-      {'label': 'Dairy', 'src': 'assets/dairy.png'},
-      {'label': 'Rice', 'src': 'assets/rice.png'},
+      {
+        'label': 'Fruits',
+        'src': 'assets/fruit.png',
+        'onpressed': () {
+          context.read<CatergoryBloc>().add(CatergorySwitchEvent(key: 4));
+          context.read<CatergorynavBloc>().add(CatergorynavEvent(key: 4));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const Categoriepage(),
+              ));
+        }
+      },
+      {
+        'label': 'Vegetables',
+        'src': 'assets/veg.png',
+        'onpressed': () {
+          context.read<CatergoryBloc>().add(CatergorySwitchEvent(key: 2));
+          context.read<CatergorynavBloc>().add(CatergorynavEvent(key: 2));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const Categoriepage(),
+              ));
+        }
+      },
+      {
+        'label': 'Dairy',
+        'src': 'assets/dairy.png',
+        'onpressed': () {
+          context.read<CatergoryBloc>().add(CatergorySwitchEvent(key: 3));
+          context.read<CatergorynavBloc>().add(CatergorynavEvent(key: 3));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const Categoriepage(),
+              ));
+        }
+      },
+      {
+        'label': 'Rice',
+        'src': 'assets/rice.png',
+        'onpressed': () {
+          context.read<CatergoryBloc>().add(CatergorySwitchEvent(key: 1));
+          context.read<CatergorynavBloc>().add(CatergorynavEvent(key: 1));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const Categoriepage(),
+              ));
+        }
+      },
     ];
     return Scaffold(
       body: BackgroundImage(
@@ -47,9 +98,9 @@ class Homepage extends StatelessWidget {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: HomeCard(
-                        label: labels[index]['label'],
-                        src: labels[index]['src'],
-                      ),
+                          label: labels[index]['label'],
+                          src: labels[index]['src'],
+                          onpressed: labels[index]['onpressed']),
                     );
                   },
                 ),

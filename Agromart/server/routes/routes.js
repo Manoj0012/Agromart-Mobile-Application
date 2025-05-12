@@ -21,7 +21,7 @@ router.post("/product/editmyproduct",EditProducts);
 
 router.post("/product/deletemyproduct",DeleteProducts);
 
-router.get("/product/allproduct",Auth,AllProduct);
+router.get("/product/allproduct",AllProduct);
 
 router.get("/product/categorieproducts",CategoriesProducts)
 
