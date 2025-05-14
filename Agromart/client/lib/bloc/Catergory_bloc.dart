@@ -1,27 +1,29 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:client/Models/CropModels.dart';
+import 'package:client/Repo/ProductRepo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CatergoryBloc extends Bloc<CatergoryEvent, CatergoryState> {
-  CatergoryBloc() : super(CatergorySucessState(data: [])) {
+  CatergoryBloc() : super(CatergoryinitalState()) {
     on<CatergorySwitchEvent>((event, emit) async {
       final int indx = event.key;
-      final postdata = [];
+      List<CropProduct> postdata = [];
       emit(CatergoryLoadingState());
       switch (indx) {
         case 0:
-          //filter All category data
+          postdata = await Productrepo.alldata();
           break;
         case 1:
-          //filter rice
+          postdata = await Productrepo.getdata("Grain");
           break;
         case 2:
-          //filter dairy
+          postdata = await Productrepo.getdata("Vegetable");
           break;
         case 3:
-          //filter veg:
+          postdata = await Productrepo.getdata("Dairy");
           break;
         case 4:
-          //filter  fruits:
+          postdata = await Productrepo.getdata("Fruit");
           break;
         default:
           return emit(CatergoryErrorState());
@@ -30,8 +32,9 @@ class CatergoryBloc extends Bloc<CatergoryEvent, CatergoryState> {
       if (postdata.isEmpty) {
         return emit(CatergoryNoDataState());
       }
-      return emit(CatergorySucessState(data: []));
+      return emit(CatergorySucessState(data: postdata));
     });
+    Future.microtask(() => add(CatergorySwitchEvent(key: 0)));
   }
 }
 
@@ -39,8 +42,10 @@ class CatergoryState {}
 
 class CatergoryLoadingState extends CatergoryState {}
 
+class CatergoryinitalState extends CatergoryState {}
+
 class CatergorySucessState extends CatergoryState {
-  final List<dynamic> data;
+  final List<CropProduct> data;
   CatergorySucessState({required this.data});
 }
 
