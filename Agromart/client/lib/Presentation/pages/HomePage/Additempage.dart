@@ -1,8 +1,8 @@
-import 'package:client/Presentation/AddCropPage.dart';
 import 'package:client/Presentation/Utiltis/Backgroundimage.dart';
-import 'package:client/Presentation/YourcropPage.dart';
-import 'package:client/Presentation/widgets/CategoryCard.dart';
-import 'package:client/Presentation/widgets/HomeAppbar.dart';
+import 'package:client/Presentation/pages/HomePage/AddCropPage.dart';
+import 'package:client/Presentation/pages/HomePage/YourcropPage.dart';
+import 'package:client/Presentation/pages/HomePage/Wigets/CategoryCard.dart';
+import 'package:client/Presentation/pages/HomePage/Wigets/HomeAppbar.dart';
 import 'package:client/bloc/CatergoryNav_bloc.dart';
 import 'package:client/bloc/Dashboard_bloc.dart';
 import 'package:flutter/material.dart';
@@ -59,18 +59,16 @@ class _AdditempageState extends State<Additempage> {
                       indexkey: 6)
                 ],
               ),
-              Expanded(
-                child: BlocBuilder<DashboardBloc, DashboardState>(
-                  builder: (context, state) {
-                    if (state is DashboardAdditemState) {
-                      return const Addcroppage();
-                    }
-                    if (state is DashboardYourCropState) {
-                      return const Yourcroppage();
-                    }
-                    return const Text("404");
-                  },
-                ),
+              BlocBuilder<DashboardBloc, DashboardState>(
+                builder: (context, state) {
+                  if (state is DashboardAdditemState) {
+                    return Addcroppage();
+                  }
+                  if (state is DashboardYourCropState) {
+                    return const Expanded(child: Yourcroppage());
+                  }
+                  return const Text("404");
+                },
               )
             ],
           ),

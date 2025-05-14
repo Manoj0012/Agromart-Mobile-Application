@@ -1,14 +1,14 @@
-import 'package:client/Presentation/pages/Categoriepage.dart';
-import 'package:client/Presentation/widgets/HomeCategoriesCard.dart';
-import 'package:client/Presentation/widgets/HomeFunctionButton.dart';
-import 'package:client/Presentation/widgets/HomeHeader.dart';
-import 'package:client/Presentation/widgets/Homeimage.dart';
+import 'package:client/Presentation/pages/HomePage/Categoriepage.dart';
+import 'package:client/Presentation/pages/HomePage/Wigets/HomeCategoriesCard.dart';
+import 'package:client/Presentation/pages/HomePage/Wigets/HomeFunctionButton.dart';
+import 'package:client/Presentation/pages/HomePage/Wigets/HomeHeader.dart';
+import 'package:client/Presentation/pages/HomePage/Wigets/Homeimage.dart';
 import 'package:client/bloc/CatergoryNav_bloc.dart';
 import 'package:client/bloc/Catergory_bloc.dart';
 import 'package:client/bloc/User_Bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../Utiltis/Backgroundimage.dart';
+import '../../Utiltis/Backgroundimage.dart';
 
 class Homepage extends StatelessWidget {
   Homepage({super.key});

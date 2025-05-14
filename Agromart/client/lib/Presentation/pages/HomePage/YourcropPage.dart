@@ -1,4 +1,4 @@
-import 'package:client/Presentation/widgets/CategoryTile.dart';
+import 'package:client/Presentation/pages/HomePage/Wigets/CategoryTile.dart';
 import 'package:flutter/widgets.dart';
 
 class Yourcroppage extends StatelessWidget {

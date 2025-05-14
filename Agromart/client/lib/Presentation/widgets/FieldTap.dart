@@ -34,7 +34,7 @@ class Fieldtap extends StatelessWidget {
         }
         return Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             label != null
                 ? Text(
