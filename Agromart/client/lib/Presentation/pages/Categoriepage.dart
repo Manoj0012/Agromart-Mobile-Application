@@ -1,16 +1,23 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:client/Models/CropModels.dart';
+import 'package:client/Presentation/Homepage_ui.dart';
 import 'package:client/Presentation/Utiltis/Backgroundimage.dart';
 import 'package:client/Presentation/Utiltis/utilis.dart';
+import 'package:client/Presentation/pages/Homepage.dart';
 import 'package:client/Presentation/widgets/CategoryCard.dart';
 import 'package:client/Presentation/widgets/CategoryTile.dart';
+import 'package:client/Presentation/widgets/HomeAppbar.dart';
 import 'package:client/Presentation/widgets/SkeletonTile.dart';
+import 'package:client/bloc/BottomNav_bloc.dart';
 import 'package:client/bloc/CatergoryNav_bloc.dart';
 import 'package:client/bloc/Catergory_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Categoriepage extends StatefulWidget {
-  const Categoriepage({super.key});
+  const Categoriepage({
+    Key? key,
+  }) : super(key: key);
   @override
   State<Categoriepage> createState() => _CategoriepageState();
 }
@@ -19,53 +26,22 @@ class _CategoriepageState extends State<Categoriepage> {
   @override
   void initState() {
     super.initState();
-    context.read<CatergoryBloc>().add(CatergorySwitchEvent(key: 0));
+    // context.read<CatergoryBloc>().add(CatergorySwitchEvent(key: 0));
   }
 
   @override
   Widget build(BuildContext context) {
-    // ignore: non_constant_identifier_names
-    final List<dynamic> Topbar = [
+    const List<dynamic> Topbar = [
       {'label': "All"},
       {'label': "Grains"},
       {'label': "Vegetables"},
       {'label': "Dairy"},
       {'label': "Fruits"},
     ];
-    Utils utils = Utils();
+    // Utils utils = Utils();
     return Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          title: const Text(
-            "Categories",
-            style: TextStyle(
-                fontSize: 20, color: Colors.black, fontWeight: FontWeight.w700),
-          ),
-          leading: Padding(
-            padding: const EdgeInsets.only(left: 15),
-            child: Center(
-              child: Container(
-                height: 40,
-                width: 40,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border.all(
-                    color: Color(utils.Primary_color), // border color
-                    width: 2.0, // border width
-                  ),
-                  borderRadius:
-                      BorderRadius.circular(12), // optional: rounded corners
-                ),
-                child: IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: const Icon(Icons.arrow_back)),
-              ),
-            ),
-          ),
-        ),
+        appBar: HomeAppbar(context, "Categories"),
         body: BackgroundImage(
           child: Padding(
             padding: const EdgeInsets.all(10),
@@ -75,7 +51,7 @@ class _CategoriepageState extends State<Categoriepage> {
                   height: MediaQuery.of(context).size.height * 0.07,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: 5,
+                    itemCount: Topbar.length,
                     itemBuilder: (context, index) {
                       return Categorycard(
                           indexkey: index,

@@ -38,36 +38,41 @@ class HomepageUi extends StatelessWidget {
             return const CircularProgressIndicator();
           },
         ),
-        bottomNavigationBar: CurvedNavigationBar(
-            onTap: (index) {
-              context
-                  .read<BottomnavBloc>()
-                  .add(BottomnavbuttonClickedEvent(index: index));
-            },
-            backgroundColor: Colors.transparent,
-            color: Color(utils.Primary_color),
-            buttonBackgroundColor: Colors.green,
-            items: const <Widget>[
-              Icon(
-                Icons.home,
-                size: 30,
-                color: Colors.white,
-              ),
-              Icon(
-                Icons.category_outlined,
-                size: 30,
-                color: Colors.white,
-              ),
-              Icon(
-                Icons.add_box_rounded,
-                size: 30,
-                color: Colors.white,
-              ),
-              Icon(
-                Icons.home,
-                size: 30,
-                color: Colors.white,
-              ),
-            ]));
+        bottomNavigationBar: BlocBuilder<BottomnavBloc, BottomnavState>(
+          builder: (context, state) {
+            return CurvedNavigationBar(
+                index: state.index,
+                onTap: (index) {
+                  context
+                      .read<BottomnavBloc>()
+                      .add(BottomnavbuttonClickedEvent(index: index));
+                },
+                backgroundColor: Colors.transparent,
+                color: Color(utils.Primary_color),
+                buttonBackgroundColor: Colors.green,
+                items: const <Widget>[
+                  Icon(
+                    Icons.home,
+                    size: 30,
+                    color: Colors.white,
+                  ),
+                  Icon(
+                    Icons.category_outlined,
+                    size: 30,
+                    color: Colors.white,
+                  ),
+                  Icon(
+                    Icons.add_box_rounded,
+                    size: 30,
+                    color: Colors.white,
+                  ),
+                  Icon(
+                    Icons.person,
+                    size: 30,
+                    color: Colors.white,
+                  ),
+                ]);
+          },
+        ));
   }
 }

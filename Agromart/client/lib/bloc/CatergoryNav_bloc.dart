@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CatergorynavBloc extends Bloc<CatergorynavEvent, CatergorynavState> {
-  CatergorynavBloc() : super(CatergorynavState(key: 0)) {
+  CatergorynavBloc() : super(CatergorynavState(key:0)) {
     on<CatergorynavEvent>((event, emit) {
       emit(CatergorynavState(key:event.key));
     });

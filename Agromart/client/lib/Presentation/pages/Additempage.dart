@@ -1,12 +1,60 @@
+import 'package:client/Presentation/Utiltis/Backgroundimage.dart';
+import 'package:client/Presentation/widgets/CategoryCard.dart';
+import 'package:client/Presentation/widgets/HomeAppbar.dart';
+import 'package:client/bloc/CatergoryNav_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class Additempage extends StatelessWidget {
+class Additempage extends StatefulWidget {
   const Additempage({super.key});
 
   @override
+  State<Additempage> createState() => _AdditempageState();
+}
+
+class _AdditempageState extends State<Additempage> {
+  @override
+  void initState() {
+    context.read<CatergorynavBloc>().add(CatergorynavEvent(key: 5));
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text("Add item page"),
+    return Scaffold(
+      appBar: HomeAppbar(context, "Add items"),
+      body: BackgroundImage(
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Categorycard(
+                      label: "Add item",
+                      onpressed: () {
+                        context
+                            .read<CatergorynavBloc>()
+                            .add(CatergorynavEvent(key: 5));
+                      },
+                      indexkey: 5),
+                  Categorycard(
+                      label: "Your Crop",
+                      onpressed: () {
+                        context
+                            .read<CatergorynavBloc>()
+                            .add(CatergorynavEvent(key: 6));
+                      },
+                      indexkey: 6)
+                ],
+              ),
+              // Expanded(child:,)
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

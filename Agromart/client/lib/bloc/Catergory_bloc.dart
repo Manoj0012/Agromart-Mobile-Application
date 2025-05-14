@@ -1,9 +1,10 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:client/Models/CropModels.dart';
 import 'package:client/Repo/ProductRepo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CatergoryBloc extends Bloc<CatergoryEvent, CatergoryState> {
-  CatergoryBloc() : super(CatergorySucessState(data:[])) {
+  CatergoryBloc() : super(CatergoryinitalState()) {
     on<CatergorySwitchEvent>((event, emit) async {
       final int indx = event.key;
       List<CropProduct> postdata = [];
@@ -33,12 +34,15 @@ class CatergoryBloc extends Bloc<CatergoryEvent, CatergoryState> {
       }
       return emit(CatergorySucessState(data: postdata));
     });
+    Future.microtask(() => add(CatergorySwitchEvent(key: 0)));
   }
 }
 
 class CatergoryState {}
 
 class CatergoryLoadingState extends CatergoryState {}
+
+class CatergoryinitalState extends CatergoryState {}
 
 class CatergorySucessState extends CatergoryState {
   final List<CropProduct> data;

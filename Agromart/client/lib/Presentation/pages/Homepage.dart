@@ -62,7 +62,7 @@ class Homepage extends StatelessWidget {
         }
       },
       {
-        'label': 'Rice',
+        'label': 'Grains',
         'src': 'assets/rice.png',
         'onpressed': () {
           context.read<CatergoryBloc>().add(CatergorySwitchEvent(key: 1));
