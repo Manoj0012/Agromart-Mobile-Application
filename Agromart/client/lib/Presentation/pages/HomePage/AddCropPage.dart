@@ -1,86 +1,151 @@
 import 'dart:io';
-
 import 'package:client/Presentation/Utiltis/utilis.dart';
+import 'package:client/Presentation/widgets/DescribeFieldTap.dart';
 import 'package:client/Presentation/widgets/FieldButton.dart';
 import 'package:client/Presentation/widgets/FieldTap.dart';
+import 'package:client/bloc/Additems_bloc.dart';
+import 'package:client/bloc/Field_Event.dart';
+import 'package:client/bloc/Field_bloc.dart';
+import 'package:client/bloc/ImagePicker_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Addcroppage extends StatelessWidget {
   Addcroppage({super.key});
-  final TextEditingController text = TextEditingController();
-  final TextEditingController texter = TextEditingController();
+  final TextEditingController cropname = TextEditingController();
+  final TextEditingController croptype = TextEditingController();
+  final TextEditingController avalibilty = TextEditingController();
+  final TextEditingController price = TextEditingController();
+  final TextEditingController description = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final Utils utils = Utils();
-    return Padding(
-      padding: const EdgeInsets.all(10),
-      child: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Row(
+    File? image;
+    return BlocConsumer<AdditemsBloc, AdditemsState>(
+      listener: (context, state) {
+        if (state is AddedItemErrorState) {
+          print(state.error);
+          context.read<FieldBloc>().add(FieldError_Event(
+              fieldname: state.fieldname, error_msg: state.error));
+        }
+      },
+      builder: (context, state) {
+        return Padding(
+          padding: const EdgeInsets.all(10),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey.shade400, width: 2),
-                    borderRadius: BorderRadius.circular(12),
-                    color: Colors.grey[200],
-                  ),
-                  width: MediaQuery.of(context).size.width * 0.4,
-                  height: 140,
+                Row(
+                  children: [
+                    BlocBuilder<ImagePickerBloc, ImagePickerState>(
+                      builder: (context, state) {
+                        if (state is ImagePickedSucessState) {
+                          image = state.image;
+                          return Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: Colors.grey.shade400, width: 2),
+                              borderRadius: BorderRadius.circular(12),
+                              color: Colors.grey[200],
+                            ),
+                            width: MediaQuery.of(context).size.width * 0.4,
+                            height: 140,
+                            child: Image.file(
+                              state.image,
+                              fit: BoxFit.contain,
+                            ),
+                          );
+                        }
+                        return Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                                color: Colors.grey.shade400, width: 2),
+                            borderRadius: BorderRadius.circular(12),
+                            color: Colors.grey[200],
+                          ),
+                          width: MediaQuery.of(context).size.width * 0.4,
+                          height: 140,
+                        );
+                      },
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.4,
+                      height: 140,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          IconButton(
+                            onPressed: () {
+                              context
+                                  .read<ImagePickerBloc>()
+                                  .add(ImagePickGallery());
+                            },
+                            icon: const Icon(Icons.file_upload_outlined),
+                            iconSize: 50,
+                            color: Color(utils.Primary_color),
+                          ),
+                          const Text("Upload Image")
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+                Fieldtap(
+                    hint: "Crop Name",
+                    fieldname: "cropname",
+                    controller: cropname),
+                Fieldtap(
+                    hint: "Crop Type",
+                    fieldname: "croptype",
+                    controller: croptype),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.44,
+                        child: Fieldtap(
+                            hint: "Avaliable in kg",
+                            fieldname: "cropavability",
+                            controller: avalibilty)),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.44,
+                      child: Fieldtap(
+                          hint: "Price per Kg",
+                          fieldname: "cropprice",
+                          controller: price),
+                    )
+                  ],
                 ),
                 const SizedBox(
-                  width: 10,
+                  height: 20,
                 ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.4,
-                  height: 140,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.file_upload_outlined),
-                        iconSize: 50,
-                        color: Color(utils.Primary_color),
-                      ),
-                      const Text("Upload Image")
-                    ],
-                  ),
-                )
+                Describefieldtap(
+                    hint: "Description",
+                    fieldname: "cropdescription",
+                    controller: description),
+                const SizedBox(
+                  height: 20,
+                ),
+                Fieldbutton(
+                    label: "Publish Crop",
+                    Onpressed: () {
+                      context.read<AdditemsBloc>().add(CropSubmitEvent(
+                          cropname: cropname.text,
+                          croptype: croptype.text,
+                          avaliablity: avalibilty.text,
+                          price: price.text,
+                          description: description.text,
+                          image: image));
+                    })
               ],
             ),
-            Fieldtap(
-                hint: "Crop Name", fieldname: "cropname", controller: text),
-            Fieldtap(
-                hint: "Crop Type", fieldname: "croptype", controller: text),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.44,
-                    child: Fieldtap(
-                        hint: "Enter Avaliable stock in Kg",
-                        fieldname: "avaliabliy",
-                        controller: text)),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.44,
-                  child: Fieldtap(
-                      hint: "Enter Price per Kg",
-                      fieldname: "price",
-                      controller: text),
-                )
-              ],
-            ),
-            Fieldtap(
-                hint: "Description", fieldname: "details", controller: text),
-            const SizedBox(
-              height: 20,
-            ),
-            Fieldbutton(label: "Publish Crop", Onpressed: () {})
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }

@@ -1,10 +1,12 @@
 import 'package:client/Presentation/Loginpage_ui.dart';
 import 'package:client/Presentation/Onboarding_ui.dart';
+import 'package:client/bloc/Additems_bloc.dart';
 import 'package:client/bloc/BottomNav_bloc.dart';
 import 'package:client/bloc/CatergoryNav_bloc.dart';
 import 'package:client/bloc/Catergory_bloc.dart';
 import 'package:client/bloc/Dashboard_bloc.dart';
 import 'package:client/bloc/Field_bloc.dart';
+import 'package:client/bloc/ImagePicker_bloc.dart';
 import 'package:client/bloc/Login_bloc.dart';
 import 'package:client/bloc/Onboarding_bloc.dart';
 import 'package:client/bloc/User_Bloc.dart';
@@ -45,7 +47,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => BottomnavBloc()),
         BlocProvider(create: (context) => CatergorynavBloc()),
         BlocProvider(create: (context) => CatergoryBloc()),
-        BlocProvider(create: (context) => DashboardBloc())
+        BlocProvider(create: (context) => DashboardBloc()),
+        BlocProvider(create: (context) => ImagePickerBloc()),
+        BlocProvider(create: (context) => AdditemsBloc()),
       ],
       child: MaterialApp(
         home: const OnboardingUi(),

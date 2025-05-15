@@ -3,6 +3,7 @@ import 'package:client/Presentation/pages/HomePage/Wigets/HomeCategoriesCard.dar
 import 'package:client/Presentation/pages/HomePage/Wigets/HomeFunctionButton.dart';
 import 'package:client/Presentation/pages/HomePage/Wigets/HomeHeader.dart';
 import 'package:client/Presentation/pages/HomePage/Wigets/Homeimage.dart';
+import 'package:client/bloc/BottomNav_bloc.dart';
 import 'package:client/bloc/CatergoryNav_bloc.dart';
 import 'package:client/bloc/Catergory_bloc.dart';
 import 'package:client/bloc/User_Bloc.dart';
@@ -54,11 +55,9 @@ class Homepage extends StatelessWidget {
         'onpressed': () {
           context.read<CatergoryBloc>().add(CatergorySwitchEvent(key: 3));
           context.read<CatergorynavBloc>().add(CatergorynavEvent(key: 3));
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const Categoriepage(),
-              ));
+          context
+              .read<BottomnavBloc>()
+              .add(BottomnavbuttonClickedEvent(index: 1));
         }
       },
       {

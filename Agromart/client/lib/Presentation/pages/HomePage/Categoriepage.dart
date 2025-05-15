@@ -22,7 +22,6 @@ class _CategoriepageState extends State<Categoriepage> {
   @override
   void initState() {
     super.initState();
-    // context.read<CatergoryBloc>().add(CatergorySwitchEvent(key: 0));
   }
 
   @override
