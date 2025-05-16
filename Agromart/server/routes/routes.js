@@ -13,7 +13,7 @@ router.post("/user/verifyotp",VerifyOTP);
 
 router.post("/user/userprofile",Userprofile);
 
-router.post("/product/addproduct",AddProduct);
+router.post("/product/addproduct",Auth,AddProduct);
 
 router.get("/product/myproducts",MyProduct);
 

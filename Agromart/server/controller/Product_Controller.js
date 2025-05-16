@@ -1,29 +1,24 @@
 const mongoose=require("mongoose");
 const Product=require("../models/Product_Schema");
-const userprofile=require("../models/Userprofile_Schema")
+const userprofile=require("../models/Userprofile_Schema");
 
 
 const AddProduct=async(req,res)=>{
 try{
-    const {email,cropname,croptype,cropcolor,
-        cropcategories,avalibilty,priceperkg,
-        location,description}=req.body;
-        
-        const user=await userprofile.findOne({email:email})
+    const {cropName,cropType,availability,pricePerKG,description}=req.body;
+     const user=req.user
+      const owner=user.userdata;
         const product=new Product({
-            owner:user._id,
-            Cropname:cropname,
-            CropType:croptype,
-            CropColor:cropcolor,
-            CropCategories:cropcategories,
-            Avalibilty:avalibilty,
-            PricePerKG:priceperkg,
-            Location:location,
+            owner:owner._id,
+            Cropname:cropName,
+            CropType:cropType,
+            Avalibilty:availability,
+            PricePerKG:pricePerKG,
+            Location:owner.Location,
             Description:description,
         })
-
         await product.save()
-        .then((result)=>{
+        .then(()=>{
             return res.status(200).json({message:"Product Data Sucessfully stored",sucess:true})
         })
         .catch((error)=>{

@@ -6,6 +6,8 @@ import 'package:client/Presentation/pages/HomePage/Homepage.dart';
 import 'package:client/Presentation/pages/HomePage/Userprofilepage.dart';
 import 'package:client/Presentation/Utiltis/utilis.dart';
 import 'package:client/bloc/BottomNav_bloc.dart';
+import 'package:client/bloc/CatergoryNav_bloc.dart';
+import 'package:client/bloc/Catergory_bloc.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,6 +29,7 @@ class HomepageUi extends StatelessWidget {
               return Homepage();
             }
             if (state is BottomnavCategory) {
+              context.read<CatergoryBloc>().add(CatergorySwitchEvent(key: 0));
               return const Categoriepage();
             }
             if (state is BottomnavAdd) {

@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:client/Models/ProductModel.dart';
+import 'package:client/Repo/ProductRepo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AdditemsBloc extends Bloc<AdditemsEvent, AdditemsState> {
@@ -13,6 +15,17 @@ class AdditemsBloc extends Bloc<AdditemsEvent, AdditemsState> {
       final File? image = event.image;
       getValidate(
           cropname, croptype, avaliablity, price, description, image, emit);
+      //api call
+      var res = await Productrepo.addProduct(Productmodel(
+          cropName: cropname,
+          cropType: croptype,
+          availability: avaliablity,
+          pricePerKG: price,
+          description: description));
+      if (res != false) {
+        return emit(ItemAddedState());
+      }
+      emit(ItemFailedState());
     });
   }
 
@@ -23,7 +36,7 @@ class AdditemsBloc extends Bloc<AdditemsEvent, AdditemsState> {
       String price,
       String description,
       File? image,
-      Emitter<AdditemsState> emit) {
+      Emitter<AdditemsState> emit) async {
     if (cropname.isEmpty) {
       return emit(AddedItemErrorState(
           error: "Cropname Required", fieldname: 'cropname'));
@@ -43,7 +56,7 @@ class AdditemsBloc extends Bloc<AdditemsEvent, AdditemsState> {
       return emit(
           AddedItemErrorState(error: "Image Required", fieldname: 'image'));
     }
-    return emit(ItemAddedState());
+    return;
   }
 }
 
@@ -78,4 +91,4 @@ class AddedItemErrorState extends AdditemsState {
 
 class ItemAddedState extends AdditemsState {}
 
-class ItemFailedState extends AdditemsBloc {}
+class ItemFailedState extends AdditemsState {}

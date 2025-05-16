@@ -3,8 +3,6 @@ class CropProduct {
   final String owner; // owner ObjectId as string
   final String cropName;
   final String cropType;
-  final String cropColor;
-  final String cropCategories;
   final String availability;
   final String pricePerKG;
   final String location;
@@ -15,8 +13,6 @@ class CropProduct {
     required this.owner,
     required this.cropName,
     required this.cropType,
-    required this.cropColor,
-    required this.cropCategories,
     required this.availability,
     required this.pricePerKG,
     required this.location,
@@ -28,8 +24,6 @@ class CropProduct {
       owner: json['owner'],
       cropName: json['Cropname'],
       cropType: json['CropType'],
-      cropColor: json['CropColor'],
-      cropCategories: json['CropCategories'],
       availability: json['Avalibilty'],
       pricePerKG: json['PricePerKG'],
       location: json['Location'],

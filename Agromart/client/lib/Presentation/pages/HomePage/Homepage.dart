@@ -1,4 +1,3 @@
-import 'package:client/Presentation/pages/HomePage/Categoriepage.dart';
 import 'package:client/Presentation/pages/HomePage/Wigets/HomeCategoriesCard.dart';
 import 'package:client/Presentation/pages/HomePage/Wigets/HomeFunctionButton.dart';
 import 'package:client/Presentation/pages/HomePage/Wigets/HomeHeader.dart';
@@ -29,11 +28,9 @@ class Homepage extends StatelessWidget {
         'onpressed': () {
           context.read<CatergoryBloc>().add(CatergorySwitchEvent(key: 4));
           context.read<CatergorynavBloc>().add(CatergorynavEvent(key: 4));
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const Categoriepage(),
-              ));
+          context
+              .read<BottomnavBloc>()
+              .add(BottomnavbuttonClickedEvent(index: 1));
         }
       },
       {
@@ -42,11 +39,9 @@ class Homepage extends StatelessWidget {
         'onpressed': () {
           context.read<CatergoryBloc>().add(CatergorySwitchEvent(key: 2));
           context.read<CatergorynavBloc>().add(CatergorynavEvent(key: 2));
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const Categoriepage(),
-              ));
+          context
+              .read<BottomnavBloc>()
+              .add(BottomnavbuttonClickedEvent(index: 1));
         }
       },
       {
@@ -66,11 +61,9 @@ class Homepage extends StatelessWidget {
         'onpressed': () {
           context.read<CatergoryBloc>().add(CatergorySwitchEvent(key: 1));
           context.read<CatergorynavBloc>().add(CatergorynavEvent(key: 1));
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const Categoriepage(),
-              ));
+          context
+              .read<BottomnavBloc>()
+              .add(BottomnavbuttonClickedEvent(index: 1));
         }
       },
     ];

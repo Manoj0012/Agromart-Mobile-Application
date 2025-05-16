@@ -84,9 +84,9 @@ class _CategoriepageState extends State<Categoriepage> {
                               productname: data[index].cropName,
                               productlocation: data[index].location,
                               price: data[index].pricePerKG,
-                              quantity: data[index].cropColor,
                               available: true,
                               src: 'assets/veg.png',
+                              quantity: data[index].availability,
                             );
                           },
                         );

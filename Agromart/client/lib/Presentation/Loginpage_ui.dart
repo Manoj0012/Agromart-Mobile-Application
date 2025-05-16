@@ -21,6 +21,7 @@ class LoginpageUi extends StatefulWidget {
 }
 
 class _LoginpageUiState extends State<LoginpageUi> {
+  // ignore: non_constant_identifier_names
   final TextEditingController email_controller = TextEditingController();
   final Utils utils = Utils();
   @override
