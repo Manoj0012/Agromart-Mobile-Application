@@ -14,6 +14,7 @@ import 'package:client/bloc/Verfication_bloc.dart';
 import 'package:client/bloc/Details_bloc.dart';
 import 'package:client/Service/Apihelper.dart';
 import 'package:client/Service/NavigatorService.dart';
+import 'package:client/bloc/Viewitem_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -50,6 +51,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => DashboardBloc()),
         BlocProvider(create: (context) => ImagePickerBloc()),
         BlocProvider(create: (context) => AdditemsBloc()),
+        BlocProvider(create: (context) => ViewitemBloc()),
       ],
       child: MaterialApp(
         home: const OnboardingUi(),

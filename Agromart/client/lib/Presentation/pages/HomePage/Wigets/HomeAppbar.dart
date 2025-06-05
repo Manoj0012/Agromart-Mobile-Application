@@ -3,12 +3,12 @@ import 'package:client/bloc/BottomNav_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-AppBar HomeAppbar(BuildContext context,String label) {
+AppBar HomeAppbar(BuildContext context, String label, VoidCallback onpressed) {
   Utils utils = Utils();
   return AppBar(
     backgroundColor: Colors.transparent,
-    title:  Text(
-     label,
+    title: Text(
+      label,
       style: const TextStyle(
           fontSize: 20, color: Colors.black, fontWeight: FontWeight.w700),
     ),
@@ -28,11 +28,7 @@ AppBar HomeAppbar(BuildContext context,String label) {
                 BorderRadius.circular(12), // optional: rounded corners
           ),
           child: IconButton(
-              onPressed: () {
-                context
-                    .read<BottomnavBloc>()
-                    .add(BottomnavbuttonClickedEvent(index: 0));
-              },
+              onPressed:onpressed,
               icon: const Icon(Icons.arrow_back)),
         ),
       ),

@@ -34,6 +34,7 @@ class _ProfilecreatedUiState extends State<ProfilecreatedUi>
     return BlocListener<DetailsBloc, DetailsState>(
       listener: (context, state) {
         if (state is DetailsHomeNavigateState) {
+          _controller.dispose();
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(

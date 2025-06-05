@@ -18,7 +18,7 @@ class Homepage extends StatelessWidget {
     final userState = context.watch<UserBloc>().state;
     String user = "Unkown";
     if (userState is UserAuthenticate) {
-      user = userState.email;
+      // user = userState['firstname'];
     }
     // final Utils utils = Utils();
     final List<dynamic> labels = [

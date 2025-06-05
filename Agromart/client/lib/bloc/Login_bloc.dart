@@ -19,6 +19,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       emit(LoginOnloadind_State());
       var res = await AuthRepo.AuthLogin(val);
       if (res != false) {
+        print(res);
         String email = res['email'];
         emit(LoginSucess_State(email: email));
       }

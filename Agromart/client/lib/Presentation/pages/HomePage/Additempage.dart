@@ -3,6 +3,7 @@ import 'package:client/Presentation/pages/HomePage/AddCropPage.dart';
 import 'package:client/Presentation/pages/HomePage/YourcropPage.dart';
 import 'package:client/Presentation/pages/HomePage/Wigets/CategoryCard.dart';
 import 'package:client/Presentation/pages/HomePage/Wigets/HomeAppbar.dart';
+import 'package:client/bloc/BottomNav_bloc.dart';
 import 'package:client/bloc/CatergoryNav_bloc.dart';
 import 'package:client/bloc/Dashboard_bloc.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,12 @@ class _AdditempageState extends State<Additempage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HomeAppbar(context, "Add items"),
+      appBar: HomeAppbar(
+          context,
+          "Add items",
+          () => context
+              .read<BottomnavBloc>()
+              .add(BottomnavbuttonClickedEvent(index: 0))),
       body: BackgroundImage(
         child: Padding(
           padding: const EdgeInsets.all(10),

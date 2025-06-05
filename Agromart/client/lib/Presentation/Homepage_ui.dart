@@ -30,6 +30,7 @@ class HomepageUi extends StatelessWidget {
             }
             if (state is BottomnavCategory) {
               context.read<CatergoryBloc>().add(CatergorySwitchEvent(key: 0));
+              context.read<CatergorynavBloc>().add(CatergorynavEvent(key: 0));
               return const Categoriepage();
             }
             if (state is BottomnavAdd) {

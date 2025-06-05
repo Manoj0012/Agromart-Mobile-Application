@@ -3,7 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class UserBloc extends Bloc<UserEvent, UserState> {
   UserBloc() : super(UserUnAuthenticate()) {
     on<UserLoggedinEvent>((event, emit) {
-      emit(UserAuthenticate(email: event.email));
+      emit(UserLogginState(email: event.email));
+    });
+    on<UserAuthenticatedEvent>((event, emit) {
+      final dynamic data = event.userdata;
+      emit(UserAuthenticate(userdata: data));
     });
   }
 }
@@ -11,11 +15,21 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 class UserState {}
 
 class UserAuthenticate extends UserState {
-  final String email;
-  UserAuthenticate({required this.email});
+  final dynamic userdata;
+  UserAuthenticate({required this.userdata});
 }
 
 class UserUnAuthenticate extends UserState {}
+
+class UserLogginState extends UserState {
+  final String email;
+  UserLogginState({required this.email});
+}
+
+class UserAuthenticatedEvent extends UserEvent {
+  final dynamic userdata;
+  UserAuthenticatedEvent({required this.userdata});
+}
 
 class UserEvent {}
 

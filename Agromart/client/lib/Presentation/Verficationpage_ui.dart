@@ -22,7 +22,7 @@ class VerficationpageUi extends StatelessWidget {
     final TextEditingController pinController = TextEditingController();
     final userState = context.watch<UserBloc>().state;
     String? useremail;
-    if (userState is UserAuthenticate) {
+    if (userState is UserLogginState) {
       useremail = userState.email;
     }
     return BlocConsumer<VerficationBloc, VerficationState>(
@@ -66,7 +66,7 @@ class VerficationpageUi extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Verficationtitle(gmail: "asss@gmail.com"),
+                Verficationtitle(gmail: useremail!),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.1),
                 PinCodeTextField(
                   length: 4,

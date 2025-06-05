@@ -5,8 +5,12 @@ import 'package:client/Presentation/pages/HomePage/Wigets/CategoryCard.dart';
 import 'package:client/Presentation/pages/HomePage/Wigets/CategoryTile.dart';
 import 'package:client/Presentation/pages/HomePage/Wigets/HomeAppbar.dart';
 import 'package:client/Presentation/widgets/SkeletonTile.dart';
+import 'package:client/Presentation/widgets/ViewcropItem.dart';
+import 'package:client/bloc/BottomNav_bloc.dart';
 import 'package:client/bloc/CatergoryNav_bloc.dart';
 import 'package:client/bloc/Catergory_bloc.dart';
+import 'package:client/bloc/User_Bloc.dart';
+import 'package:client/bloc/Viewitem_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -36,7 +40,13 @@ class _CategoriepageState extends State<Categoriepage> {
     // Utils utils = Utils();
     return Scaffold(
         backgroundColor: Colors.white,
-        appBar: HomeAppbar(context, "Categories"),
+        appBar: HomeAppbar(
+          context,
+          "Categories",
+          () => context
+              .read<BottomnavBloc>()
+              .add(BottomnavbuttonClickedEvent(index: 0)),
+        ),
         body: BackgroundImage(
           child: Padding(
             padding: const EdgeInsets.all(10),
@@ -81,13 +91,22 @@ class _CategoriepageState extends State<Categoriepage> {
                           itemCount: data.length,
                           itemBuilder: (context, index) {
                             return Categorytile(
-                              productname: data[index].cropName,
-                              productlocation: data[index].location,
-                              price: data[index].pricePerKG,
-                              available: true,
-                              src: 'assets/veg.png',
-                              quantity: data[index].availability,
-                            );
+                                productname: data[index].cropName,
+                                productlocation: data[index].location,
+                                price: data[index].pricePerKG,
+                                available: true,
+                                src: 'assets/veg.png',
+                                quantity: data[index].availability,
+                                onpressed: () {
+                                  context.read<ViewitemBloc>().add(
+                                      ViewNavigateEvent(data: data[index]));
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const Viewcropitem(),
+                                      ));
+                                });
                           },
                         );
                       }

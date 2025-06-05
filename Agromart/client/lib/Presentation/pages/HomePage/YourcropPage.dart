@@ -10,12 +10,14 @@ class Yourcroppage extends StatelessWidget {
         itemCount: 10,
         itemBuilder: (context, index) {
           return Categorytile(
-              productname: "sample",
-              productlocation: "dcsvdv",
-              price: "dv",
-              quantity: "10",
-              available: true,
-              src: "assets/rice.png");
+            productname: "sample",
+            productlocation: "dcsvdv",
+            price: "dv",
+            quantity: "10",
+            available: true,
+            src: "assets/rice.png",
+            onpressed: () {},
+          );
         });
   }
 }

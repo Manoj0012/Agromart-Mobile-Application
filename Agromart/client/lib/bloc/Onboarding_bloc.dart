@@ -15,8 +15,7 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
             return emit(OnboardingProfileSet());
           }
           await Future.delayed(const Duration(seconds: 2));
-          return emit(OnboardingSucess_state(
-              userdata: data['user']['userdata']['Firstname']));
+          return emit(OnboardingSucess_state(userdata: data['user']['userdata']));
         }
       } catch (error) {
         return emit(OnboardingError_state(msg: "Internal Server Error"));

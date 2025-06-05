@@ -15,17 +15,17 @@ router.post("/user/userprofile",Userprofile);
 
 router.post("/product/addproduct",Auth,AddProduct);
 
-router.get("/product/myproducts",MyProduct);
+router.get("/product/myproducts",Auth,MyProduct);
 
 router.post("/product/editmyproduct",EditProducts);
 
 router.post("/product/deletemyproduct",DeleteProducts);
 
-router.get("/product/allproduct",AllProduct);
+router.get("/product/allproduct",Auth,AllProduct);
 
-router.get("/product/categorieproducts",CategoriesProducts)
+router.get("/product/categorieproducts",Auth,CategoriesProducts)
 
-router.get("/product/productdetails",ProductsDetails)
+router.get("/product/productdetails",Auth,ProductsDetails)
 
 
 
