@@ -1,5 +1,6 @@
 import 'package:client/Presentation/Loginpage_ui.dart';
 import 'package:client/Presentation/Onboarding_ui.dart';
+import 'package:client/Presentation/Verficationpage_ui.dart';
 import 'package:client/bloc/Additems_bloc.dart';
 import 'package:client/bloc/BottomNav_bloc.dart';
 import 'package:client/bloc/CatergoryNav_bloc.dart';
@@ -54,7 +55,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => ViewitemBloc()),
       ],
       child: MaterialApp(
-        home: const OnboardingUi(),
+        home: const VerficationpageUi(),
         navigatorKey: NavigatorService.navigatorKey,
         routes: {'/login': (context) => const LoginpageUi()},
         debugShowCheckedModeBanner: false,

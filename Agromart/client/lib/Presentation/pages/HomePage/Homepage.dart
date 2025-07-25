@@ -16,7 +16,7 @@ class Homepage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userState = context.watch<UserBloc>().state;
-    String user = "Unkown";
+    String user = "Manoj";
     if (userState is UserAuthenticate) {
       // user = userState['firstname'];
     }

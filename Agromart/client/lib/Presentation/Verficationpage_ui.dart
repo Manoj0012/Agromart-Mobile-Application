@@ -66,7 +66,7 @@ class VerficationpageUi extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Verficationtitle(gmail: useremail!),
+                Verficationtitle(gmail:""),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.1),
                 PinCodeTextField(
                   length: 4,
